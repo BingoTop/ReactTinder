@@ -49,8 +49,12 @@ function Nav() {
     } else {
         return (
             <div className="header">
-                <div className="icons-list">
-                    <AppleFilled />
+                <div className="logo">
+                    <AppleFilled
+                        style={{
+                            fontSize: '32px',
+                        }}
+                    />
                 </div>
                 <Menu
                     theme="Compact"
@@ -63,6 +67,11 @@ function Nav() {
                 >
                     <Menu.Item key="1">
                         <Link to="/">Home</Link>
+                    </Menu.Item>
+                    <Menu.Item key="upload">
+                        <a href="/video/upload">
+                            Uplaod Videos
+                        </a>
                     </Menu.Item>
                 </Menu>
             </div>
