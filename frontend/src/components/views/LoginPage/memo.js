@@ -1,0 +1,24 @@
+<Route
+exact
+path="/"
+component={Auth(
+    LandingPage,
+    null
+)}
+></Route>
+<Route
+exact
+path="/login"
+component={Auth(
+    LoginPage,
+    false
+)}
+></Route>
+<Route
+exact
+path="/register"
+component={Auth(
+    RegisterPage,
+    false
+)}
+></Route>
