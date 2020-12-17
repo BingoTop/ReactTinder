@@ -5,7 +5,6 @@ import {
     Form,
     message,
     Input,
-    Icon,
 } from 'antd';
 import { withRouter } from 'react-router-dom';
 import DropZone from 'react-dropzone';
@@ -30,7 +29,7 @@ const CategoryOptions = [
     { value: 3, label: 'Pets & Animals' },
 ];
 
-function VideoUploadPage() {
+function VideoUploadPage(props) {
     const user = useSelector(
         (state) => state.user
     );
@@ -281,4 +280,4 @@ function VideoUploadPage() {
     );
 }
 
-export default VideoUploadPage;
+export default withRouter(VideoUploadPage);

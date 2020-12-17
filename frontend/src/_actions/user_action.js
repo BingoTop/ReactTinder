@@ -4,6 +4,7 @@ import {
     REGISTER_USER,
     AUTH_USER,
 } from './types';
+import { USER_SERVER } from '../components/Config';
 
 export function loginUser(dataToSubmit) {
     const request = axios
@@ -29,7 +30,7 @@ export function registerUser(dataToSubmit) {
 
 export function auth() {
     const request = axios
-        .get('api/users/auth')
+        .get(`${USER_SERVER}/auth`)
         .then((res) => res.data);
 
     return {

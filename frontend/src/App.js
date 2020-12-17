@@ -12,64 +12,61 @@ import { Row, Col } from 'antd';
 import 'antd/dist/antd.css';
 import Nav from './components/views/Nav/Nav';
 import VideoUploadPage from './components/views/VideoUploadPage/VideoUploadPage';
+import VideoDetailPage from './components/views/VideoDetailPage/VideoDetailPage';
 
 function App() {
     return (
         <Router>
             <Nav />
-            <Row gutter={8}>
-                <Col xs={24} md={6}></Col>
-                <Col xs={24} md={12}>
-                    <div
-                        style={{
-                            // display: 'flex',
-                            // justifyContent:
-                            //     'center',
-                            // alignItems: 'center',
-                            // width: '100%',
-                            paddingTop: '75px',
-                            minHeight:
-                                'calc(100vh-80px)',
-                        }}
-                    >
-                        <Switch>
-                            <Route
-                                exact
-                                path="/"
-                                component={Auth(
-                                    LandingPage,
-                                    null
-                                )}
-                            ></Route>
-                            <Route
-                                exact
-                                path="/login"
-                                component={Auth(
-                                    LoginPage,
-                                    false
-                                )}
-                            ></Route>
-                            <Route
-                                exact
-                                path="/register"
-                                component={Auth(
-                                    RegisterPage,
-                                    false
-                                )}
-                            ></Route>
-                            <Route
-                                exact
-                                path="/video/upload"
-                                component={Auth(
-                                    VideoUploadPage,
-                                    true
-                                )}
-                            ></Route>
-                        </Switch>
-                    </div>
-                </Col>
-                <Col xs={24} md={6}></Col>
-            </Row>
+            <div
+                style={{
+                    paddingTop: '75px',
+                    minHeight: 'calc(100vh-80px)',
+                }}
+            >
+                <Switch>
+                    <Route
+                        exact
+                        path="/"
+                        component={Auth(
+                            LandingPage,
+                            null
+                        )}
+                    ></Route>
+                    <Route
+                        exact
+                        path="/login"
+                        component={Auth(
+                            LoginPage,
+                            false
+                        )}
+                    ></Route>
+                    <Route
+                        exact
+                        path="/register"
+                        component={Auth(
+                            RegisterPage,
+                            false
+                        )}
+                    ></Route>
+                    <Route
+                        exact
+                        path="/video/upload"
+                        component={Auth(
+                            VideoUploadPage,
+                            true
+                        )}
+                    ></Route>
+                    <Route
+                        exact
+                        path="/video/:videoId"
+                        component={Auth(
+                            VideoDetailPage,
+                            null
+                        )}
+                    ></Route>
+                </Switch>
+            </div>
         </Router>
     );
 }

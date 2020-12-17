@@ -1,6 +1,8 @@
-import Axios from 'axios';
 import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import {
+    useDispatch,
+    useSelector,
+} from 'react-redux';
 import { auth } from '../_actions/user_action';
 
 export default function (
@@ -13,12 +15,15 @@ export default function (
     // false => 로그인한 유저는 출입 불가능한 페이지
 
     function AuthenticationCheck(props) {
+        let user = useSelector(
+            (state) => state.user
+        );
         const dispatch = useDispatch();
         useEffect(() => {
-            dispatch(auth()).then((res) => {
+            dispatch(auth()).then(async (res) => {
                 // console.log(res);
                 // 로그인 하지 않은 상태
-                if (!res.payload.isAuth) {
+                if (await !res.payload.isAuth) {
                     if (option) {
                         props.history.push(
                             '/login'
@@ -32,7 +37,7 @@ export default function (
                     ) {
                         props.history.push('/');
                     } else {
-                        if (!option) {
+                        if (option === false) {
                             props.history.push(
                                 '/'
                             );
@@ -40,9 +45,13 @@ export default function (
                     }
                 }
             });
-            Axios.get('/api/users/auth');
         }, []);
-        return <SpecificComponent />;
+        return (
+            <SpecificComponent
+                {...props}
+                user={user}
+            />
+        );
     }
     return AuthenticationCheck;
 }
