@@ -43,6 +43,11 @@ function Nav() {
                             Signup
                         </a>
                     </Menu.Item>
+                    <Menu.Item key="subscription">
+                        <a href="/subscription">
+                            Subscription
+                        </a>
+                    </Menu.Item>
                 </Menu>
             </div>
         );
@@ -71,6 +76,11 @@ function Nav() {
                     <Menu.Item key="upload">
                         <a href="/video/upload">
                             Uplaod Videos
+                        </a>
+                    </Menu.Item>
+                    <Menu.Item key="subscription">
+                        <a href="/subscription">
+                            Subscription
                         </a>
                     </Menu.Item>
                 </Menu>

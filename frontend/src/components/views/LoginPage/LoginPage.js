@@ -36,6 +36,10 @@ function LoginPage(props) {
         dispatch(loginUser(body)).then(
             (res, err) => {
                 if (res.payload.loginSuccess) {
+                    window.localStorage.setItem(
+                        'user_Id',
+                        res.payload.userId
+                    );
                     props.history.push('/');
                 } else {
                     alert('Error');

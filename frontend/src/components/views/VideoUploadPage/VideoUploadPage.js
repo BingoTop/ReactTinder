@@ -3,7 +3,6 @@ import {
     Typography,
     Button,
     Form,
-    message,
     Input,
 } from 'antd';
 import { withRouter } from 'react-router-dom';
@@ -85,7 +84,7 @@ function VideoUploadPage(props) {
             )
             .then((res) => {
                 if (res.data.success) {
-                    console.log(res.data);
+                    props.history.push('/');
                 } else {
                     alert('비디오 업로드 실패');
                 }

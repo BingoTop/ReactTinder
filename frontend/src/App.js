@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import {
     BrowserRouter as Router,
     Route,
@@ -8,11 +8,11 @@ import LandingPage from './components/views/LandingPage/LandingPage';
 import LoginPage from './components/views/LoginPage/LoginPage';
 import RegisterPage from './components/views/RegisterPage/RegisterPage';
 import Auth from './hoc/auth';
-import { Row, Col } from 'antd';
 import 'antd/dist/antd.css';
 import Nav from './components/views/Nav/Nav';
 import VideoUploadPage from './components/views/VideoUploadPage/VideoUploadPage';
 import VideoDetailPage from './components/views/VideoDetailPage/VideoDetailPage';
+import SubscriptionPage from './components/views/SubscriptionPage/SubscriptionPage';
 
 function App() {
     return (
@@ -62,6 +62,14 @@ function App() {
                         path="/video/:videoId"
                         component={Auth(
                             VideoDetailPage,
+                            null
+                        )}
+                    ></Route>
+                    <Route
+                        exact
+                        path="/subscription"
+                        component={Auth(
+                            SubscriptionPage,
                             null
                         )}
                     ></Route>

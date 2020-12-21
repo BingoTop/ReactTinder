@@ -2,7 +2,6 @@ import React, {
     useEffect,
     useState,
 } from 'react';
-import { withRouter } from 'react-router-dom';
 import {
     Card,
     Avatar,
@@ -16,11 +15,19 @@ import moment from 'moment';
 const { Title } = Typography;
 const { Meta } = Card;
 
-function LandingPage(props) {
+function SubscriptionPage(props) {
     const [Video, setVideo] = useState([]);
     useEffect(() => {
+        let subscriptionVar = {
+            userFrom: localStorage.getItem(
+                'user_Id'
+            ),
+        };
         axios
-            .get('/api/video/getVideos')
+            .post(
+                '/api/video/getSubscriptionVideos',
+                subscriptionVar
+            )
             .then((res) => {
                 if (res.data.success) {
                     setVideo(res.data.videos);
@@ -134,7 +141,7 @@ function LandingPage(props) {
                 margin: '3rem auto',
             }}
         >
-            <Title level={2}> Recommended</Title>
+            <Title level={2}> Subscription</Title>
             <hr />
             <Row gutter={[32, 16]}>
                 {renderCard}
@@ -143,4 +150,4 @@ function LandingPage(props) {
     );
 }
 
-export default withRouter(LandingPage);
+export default SubscriptionPage;

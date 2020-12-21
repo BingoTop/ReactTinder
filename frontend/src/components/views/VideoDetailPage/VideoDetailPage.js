@@ -5,9 +5,15 @@ import React, {
 import { Row, Col, List, Avatar } from 'antd';
 import Axios from 'axios';
 import SideVideo from './Sections/SideVideo';
+import Subscribe from './Sections/Subscribe';
+import Comment from './Sections/Comment';
 
 function VideoDetailPage(props) {
     const videoId = props.match.params.videoId;
+    const [
+        CommentLists,
+        setCommentLists,
+    ] = useState([]);
     const variable = { videoId: videoId };
     const [
         VideoDetail,
@@ -22,7 +28,6 @@ function VideoDetailPage(props) {
                 setVideoDetail(
                     res.data.videoDetail
                 );
-                console.log(VideoDetail);
             } else {
                 alert(
                     '비디오 정보 가져오기 실패'
@@ -30,12 +35,25 @@ function VideoDetailPage(props) {
             }
         });
     }, []);
+    useEffect(() => {
+        Axios.post(
+            '/api/comment/getComments',
+            variable
+        ).then((res) => {
+            if (res.data.success) {
+                setCommentLists(
+                    res.data.comments
+                );
+            } else {
+                alert('댓글 정보 가져오기 실패');
+            }
+        });
+    }, [CommentLists]);
 
     if (VideoDetail.writter) {
         return (
             <Row gutter={[16, 16]}>
                 <Col lg={18} xs={24}>
-                    Video Detail Page
                     <div
                         style={{
                             width: '100%',
@@ -49,7 +67,17 @@ function VideoDetailPage(props) {
                                 width: '100%',
                             }}
                         ></video>
-                        <List.Item actions>
+                        <List.Item
+                            actions={[
+                                <Subscribe
+                                    userTo={
+                                        VideoDetail
+                                            .writter
+                                            ._id
+                                    }
+                                />,
+                            ]}
+                        >
                             <List.Item.Meta
                                 avatar={
                                     <Avatar
@@ -71,6 +99,12 @@ function VideoDetailPage(props) {
                             />
                         </List.Item>
                         {/* comments */}
+                        <Comment
+                            postId={videoId}
+                            CommentLists={
+                                CommentLists
+                            }
+                        />
                     </div>
                 </Col>
                 <Col lg={6} xs={24}>
