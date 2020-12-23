@@ -3,15 +3,20 @@ import React, {
     useState,
 } from 'react';
 import SingleComment from './SingleComment';
+import { withRouter } from 'react-router-dom';
 
 function ReplyComment(props) {
+    const [
+        OpenReplyComments,
+        setOpenReplyComments,
+    ] = useState(false);
     const [
         ChildCommentNumber,
         setChildCommentNumber,
     ] = useState(0);
     useEffect(() => {
         let commentNumber = 0;
-        props.commentsLists.map((comment) => {
+        props.commentLists.map((comment) => {
             if (
                 comment.responseTo ===
                 props.parentCommentId
@@ -20,19 +25,34 @@ function ReplyComment(props) {
             }
             setChildCommentNumber(commentNumber);
         });
-    }, []);
+    }, [props.commentLists]);
+    // props.commentLists.map((comment, index) => {
+    //     // console.log(props.parentCommentId);
+    //     // console.log(comment.responseTo + '\n');
+    //     if (
+    //         comment.responseTo ===
+    //         props.parentCommentId
+    //     ) {
+    //         console.log('일치');
+    //     }
+    // });
     const renderReplyComment = (
         parentCommentId
     ) =>
         props.commentLists.map(
-            (index, comment) => (
+            (comment, index) => (
                 <>
                     {comment.responseTo ===
                         parentCommentId && (
-                        <div>
+                        <div
+                            style={{
+                                width: '80%',
+                                marginLeft:
+                                    '40px',
+                            }}
+                        >
                             <SingleComment
                                 comment={comment}
-                                key={index}
                                 postId={
                                     props.postId
                                 }
@@ -43,7 +63,7 @@ function ReplyComment(props) {
                                     props.postId
                                 }
                                 commentLists={
-                                    props.CommentLists
+                                    props.commentLists
                                 }
                                 parentCommentId={
                                     comment._id
@@ -54,6 +74,9 @@ function ReplyComment(props) {
                 </>
             )
         );
+    const onHandleChange = () => {
+        setOpenReplyComments(!OpenReplyComments);
+    };
     return (
         <div>
             {ChildCommentNumber > 0 && (
@@ -62,17 +85,20 @@ function ReplyComment(props) {
                         fontSize: '14px',
                         margin: 0,
                         color: 'gray',
+                        cursor: 'pointer',
                     }}
+                    onClick={onHandleChange}
                 >
                     View {ChildCommentNumber} more
                     comment(s)
                 </p>
             )}
-            {renderReplyComment(
-                props.parentCommentId
-            )}
+            {OpenReplyComments &&
+                renderReplyComment(
+                    props.parentCommentId
+                )}
         </div>
     );
 }
 
-export default ReplyComment;
+export default withRouter(ReplyComment);

@@ -27,7 +27,7 @@ function Comment(props) {
             user.userData &&
             !user.userData.isAuth
         ) {
-            props.history.push('/login');
+            return props.history.push('/login');
         }
         e.preventDefault();
         const variables = {
@@ -35,7 +35,6 @@ function Comment(props) {
             writter: user.userData._id,
             postId: videoId,
         };
-        console.log(variables);
         Axios.post(
             '/api/comment/saveComment',
             variables
@@ -52,7 +51,6 @@ function Comment(props) {
         <div>
             <br />
             <p>댓글</p>
-            {/* {console.log(props.CommentLists)} */}
             {/* Comment Lists */}
             {props.CommentLists &&
                 props.CommentLists.map(
@@ -63,7 +61,6 @@ function Comment(props) {
                                     comment={
                                         comment
                                     }
-                                    key={index}
                                     postId={
                                         videoId
                                     }

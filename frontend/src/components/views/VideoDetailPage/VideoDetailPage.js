@@ -41,15 +41,19 @@ function VideoDetailPage(props) {
             variable
         ).then((res) => {
             if (res.data.success) {
-                setCommentLists(
-                    res.data.comments
-                );
+                if (
+                    res.data.comments !==
+                    CommentLists
+                ) {
+                    setCommentLists(
+                        res.data.comments
+                    );
+                }
             } else {
                 alert('댓글 정보 가져오기 실패');
             }
         });
-    }, [CommentLists]);
-
+    }, []);
     if (VideoDetail.writter) {
         return (
             <Row gutter={[16, 16]}>

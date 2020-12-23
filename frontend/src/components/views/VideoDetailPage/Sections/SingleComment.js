@@ -7,6 +7,7 @@ import {
 } from 'antd';
 import { useSelector } from 'react-redux';
 import Axios from 'axios';
+import { withRouter } from 'react-router-dom';
 
 const { TextArea } = Input;
 
@@ -30,10 +31,16 @@ function SingleComment(props) {
     };
     const onSubmit = (e) => {
         e.preventDefault();
+        if (
+            user.userData &&
+            !user.userData.isAuth
+        ) {
+            return props.history.push('/login');
+        }
         const variables = {
             content: CommentValue,
             writter: user.userData._id,
-            postId: props.videoId,
+            postId: props.postId,
             responseTo: props.comment._id,
         };
         Axios.post(
@@ -42,6 +49,7 @@ function SingleComment(props) {
         ).then((res) => {
             if (res.data.success) {
                 setCommentValue('');
+                setOpenReply(false);
             } else {
                 alert('댓글 작성 실패');
             }
@@ -104,4 +112,4 @@ function SingleComment(props) {
     );
 }
 
-export default SingleComment;
+export default withRouter(SingleComment);
