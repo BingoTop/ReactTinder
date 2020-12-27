@@ -8,6 +8,7 @@ import {
 import { useSelector } from 'react-redux';
 import Axios from 'axios';
 import { withRouter } from 'react-router-dom';
+import LikeDislikes from "./LikeDislikes"
 
 const { TextArea } = Input;
 
@@ -56,7 +57,8 @@ function SingleComment(props) {
         });
     };
     const actions = [
-        <span
+        <LikeDislikes userId={localStorage.getItem("userId")} commentId={props.comment._id} />
+        ,<span
             onClick={onClickReplyOpen}
             key="comment-basic-reply-to"
         >

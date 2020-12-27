@@ -7,6 +7,7 @@ import Axios from 'axios';
 import SideVideo from './Sections/SideVideo';
 import Subscribe from './Sections/Subscribe';
 import Comment from './Sections/Comment';
+import LikeDisLikes from './Sections/LikeDislikes';
 
 function VideoDetailPage(props) {
     const videoId = props.match.params.videoId;
@@ -73,6 +74,7 @@ function VideoDetailPage(props) {
                         ></video>
                         <List.Item
                             actions={[
+                                <LikeDisLikes video userId={localStorage.getItem("userId")} videoId={videoId} />,
                                 <Subscribe
                                     userTo={
                                         VideoDetail

@@ -20,6 +20,11 @@ app.use(
     require('./routes/subscribe')
 );
 app.use(
+    '/api/like',
+    require('./routes/like')
+);
+
+app.use(
     '/api/comment',
     require('./routes/comment')
 );

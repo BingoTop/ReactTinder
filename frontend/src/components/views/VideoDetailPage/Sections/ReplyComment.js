@@ -26,16 +26,6 @@ function ReplyComment(props) {
             setChildCommentNumber(commentNumber);
         });
     }, [props.commentLists]);
-    // props.commentLists.map((comment, index) => {
-    //     // console.log(props.parentCommentId);
-    //     // console.log(comment.responseTo + '\n');
-    //     if (
-    //         comment.responseTo ===
-    //         props.parentCommentId
-    //     ) {
-    //         console.log('일치');
-    //     }
-    // });
     const renderReplyComment = (
         parentCommentId
     ) =>
